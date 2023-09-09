@@ -19,7 +19,16 @@ static void INIT_BUFFER_ALLOC()
 	}
 }
 
+static U32 INIT_CONNECTION()
+{
+	URL* URL; 
+	ADDRESS* ADDRESS_INFO;
+
+	return URL->ADDRESS_INFO(URL->HOST, DEFAULT_PORT, ADDRESS_INFO);
+}
+
 int main(int argc, char* argv[])
 {
 	INIT_BUFFER_ALLOC();
+	INIT_CONNECTION();
 }
