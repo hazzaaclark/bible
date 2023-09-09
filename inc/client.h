@@ -9,12 +9,19 @@
 #ifndef HTTP_CLIENT
 #define HTTP_CLIENT
 
+/* NESTED INCLUDES */
+
+#include "common.h"
+
 /* SYSTEM INCLUDES */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined(USE_HTTP)
+#include <winsock2.h>
+#include <WS2tcpip.h>
+
+#ifndef USE_HTTP
 #define USE_HTTP
 
 #define HTTP_BUFFER_SIZE     (512 << 1024)
@@ -23,16 +30,23 @@
 #define HTTP_ALLOC(ARG) if(ARG) {malloc(ARG);}
 #define HTTP_FREE(ARG)  if(ARG) {free(ARG);}
 
-typedef struct HTTP_SERVER
+typedef struct HTTP_RESPONSE
 {
-    static void INIT_CONNECTION(char PORT, char BUFFER);
+	static URL* URL_REQUEST;
+	static char* STATUS_FLAG;
+	static char* URL_REQ_HEADERS;
+	static char* URL_RES_HEADERS;
+};
 
-} HTTP_SERVER;
-
-
-
+typedef struct URL
+{
+	typedef struct PARSE_URL;
+	static char* INDEX;
+	static char* HOST;
+	static char* IP;
+	static char* QUERY;
+};
 
 
 #endif
-
 #endif
