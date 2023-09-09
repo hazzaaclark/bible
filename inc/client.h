@@ -30,10 +30,13 @@
 #define HTTP_ALLOC(ARG) if(ARG) {malloc(ARG);}
 #define HTTP_FREE(ARG)  if(ARG) {free(ARG);}
 
+#define HTTP_ERROR(ARG, MESSAGE, ...) if (!(ARG)) { fprintf(stderr, MESSAGE "\n", ##__VA_ARGS__); goto error; }
+
 typedef struct HTTP_RESPONSE
 {
 	static URL* URL_REQUEST;
 	static char* STATUS_FLAG;
+	static U32 STATUS_COUNT;
 	static char* URL_REQ_HEADERS;
 	static char* URL_RES_HEADERS;
 };
@@ -43,9 +46,13 @@ typedef struct URL
 	typedef struct PARSE_URL;
 	static char* INDEX;
 	static char* HOST;
+	static char* PORT;
 	static char* IP;
 	static char* QUERY;
+	static U32 ADDRESS_INFO(char* HOST, char PORT, ADDRESS* ADDRESS);
 };
+
+typedef struct ADDRESS;
 
 
 #endif
