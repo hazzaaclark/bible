@@ -6,5 +6,20 @@
 
 /* NESTED INCLUDES */
 
-#include "common.h"
 #include "bible.h"
+#include "client.h"
+
+static void INIT_BUFFER_ALLOC()
+{
+	HTTP_RESPONSE* HTTP;
+
+	if (HTTP != NULL)
+	{
+		calloc(1, sizeof(HTTP_BUFFER_SIZE));
+	}
+}
+
+int main(int argc, char* argv[])
+{
+	INIT_BUFFER_ALLOC();
+}
