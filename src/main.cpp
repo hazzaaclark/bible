@@ -21,6 +21,8 @@ static ADDRESS* ADDRESS_INFO;
 
 /* CHECKS BY DECLARING THE HTTP RESPONSE INSTANCE AS NOT NULL */
 
+#ifdef USE_HTTP
+
 static void INIT_BUFFER_ALLOC()
 {
 	if (HTTP != NULL)
@@ -46,9 +48,10 @@ static U32 INIT_CONNECTION()
 	return URL->ADDRESS_INFO(URL->HOST, DEFAULT_PORT, ADDRESS_INFO);
 }
 
+#endif
+
 int main(int argc, char* argv[])
 {
-
 	if (argc != 2)
 	{
 		fprintf(stderr, "Parsing contents of the API: <url>\n");
