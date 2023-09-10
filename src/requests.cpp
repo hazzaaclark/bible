@@ -36,6 +36,9 @@ static U32* MAKE_REQUEST(U32 SOCKET, char* HOSTNAME, char* REQUEST, char* REQUES
 		TOTAL_BYTES_SENT += sizeof(BYTES_SENT);
 	}
 
+	free(REQUEST);
+	return;
+
 }
 
 #endif
