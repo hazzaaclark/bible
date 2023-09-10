@@ -34,14 +34,14 @@
 
 typedef struct HTTP_RESPONSE
 {
-	static URL* URL_REQUEST;
+	typedef HTTP_URL* URL_REQUEST;
 	static char* STATUS_FLAG;
 	static U32 STATUS_COUNT;
 	static char* URL_REQ_HEADERS;
 	static char* URL_RES_HEADERS;
 };
 
-typedef struct URL
+typedef struct HTTP_URL
 {
 	typedef struct PARSE_URL;
 	static char* INDEX;
@@ -52,7 +52,12 @@ typedef struct URL
 	static U32 ADDRESS_INFO(char* HOST, char PORT, ADDRESS* ADDRESS);
 };
 
-typedef struct ADDRESS;
+typedef struct ADDRESS
+{
+	static U32 SOCKTYPE;
+	static U32 PROTOCOL;
+	static U32 LENGTH;
+};
 
 
 #endif
