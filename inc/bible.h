@@ -14,6 +14,21 @@
 #include "common.h"
 #include "client.h"
 
+/* SYSTEM INCLUDES */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#if defined(USE_BIBILE)
+#define USE_BIBLE
+#else
+#define USE_BIBLE
+
+#define ENDPOINT       "https://my.bible.com"
+#define SIGN_IN        "/sign-in"
+#define VERSES         "https://nodejs.bible.com/api/moments/votd/3.1"
+
+
+#endif
 
 #endif 
