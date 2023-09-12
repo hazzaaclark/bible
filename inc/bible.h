@@ -28,6 +28,16 @@
 #define SIGN_IN        "/sign-in"
 #define VERSES         "https://nodejs.bible.com/api/moments/votd/3.1"
 
+#define USERNAME       ""
+#define PASSWORD       ""
+#define VOTD           ""
+#define REF            ""
+
+typedef struct BIBLE
+{
+	static U32 DAY;
+	static char VERSE;
+};
 
 #endif
 
