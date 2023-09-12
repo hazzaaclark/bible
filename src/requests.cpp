@@ -57,7 +57,7 @@ static U32* MAKE_REQUEST(U32 SOCKET, char* HOSTNAME, char* REQUEST, char* REQUES
 static U32 FETCH_RESPONSE(U32 DATA_SIZE, U32 SOCKET)
 {
 	UNK BYTES_RECEIVED;
-	static char* DATA_RECEIVED = (char*)malloc(DATA_SIZE * sizeof(char));
+	static char* DATA_RECEIVED = (char*) malloc(DATA_SIZE * sizeof(char));
 
 	while (1)
 	{
