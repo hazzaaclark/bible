@@ -5,7 +5,9 @@ Fast and Reliable API for NETBible - Psalms 27: 1-3
 
 - Multi-platform compatibility (Windows, Unix)
 - Fully configurable with the Command Line
-- It's lightweight, ease-of-use allows for seamless interaction
+- It's lightweight, ease-of-use allows for seamless interaction with commands
+
+- more features and a commands list will be provided as and when it is available
 
 # Building:
 
