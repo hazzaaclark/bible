@@ -12,7 +12,7 @@ Fast and Reliable API for NETBible - Psalms 27: 1-3
 # Building:
 
 - There will soon be a designated CMAKE file available for this project.
-- in the meantime, it would be a case of compiling the files together through a linker such as gcc
+- in the meantime, it would be a case of compiling the files together through a linker such as g++
 
 # Contribution:
 
