@@ -1,6 +1,6 @@
 /* Copyright (C) Harry Clark 2023 */
 
-/* YouVersion Bible API */
+/* NETBible API */
 
 /* THIS FILE PERTAINS TO THE HTTP CLIENT THAT WILL */
 /* TAKE IN AN ARBITARY SOCKET AND PORT ID TO BE ABLE TO */
@@ -18,13 +18,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
 #include <winsock2.h>
 #include <WS2tcpip.h>
+#endif
 
 #ifndef USE_HTTP
 #define USE_HTTP
 
-#define HTTP_BUFFER_SIZE     (512 << 1024)
+#define HTTP_BUFFER_SIZE     (512 * 1024)
 #define DEFAULT_PORT         8080
 
 #define HTTP_ALLOC(ARG) if(ARG) {malloc(ARG);}
@@ -34,31 +36,33 @@
 
 typedef struct HTTP_RESPONSE
 {
-	typedef HTTP_URL* URL_REQUEST;
-	static char* STATUS_FLAG;
-	static U32 STATUS_COUNT;
-	static char* URL_REQ_HEADERS;
-	static char* URL_RES_HEADERS;
+	HTTP_URL URL_REQUEST;
+	char* STATUS_FLAG;
+	char* URL_REQ_HEADERS;
+	char* URL_RES_HEADERS;
+	U32 STATUS_COUNT;
+
 };
 
 typedef struct HTTP_URL
 {
-	typedef struct PARSE_URL;
-	static char* INDEX;
-	static char* HOST;
-	static char* PORT;
-	static char* IP;
-	static char* QUERY;
-	static U32 ADDRESS_INFO(char* HOST, char PORT, ADDRESS* ADDRESS);
+	char* INDEX;
+	char* HOST;
+	char* PORT;
+	char* IP;
+	char* QUERY;
+	U32 ADDRESS_INFO(char* HOST, char PORT, ADDRESS* ADDRESS);
 };
 
 typedef struct ADDRESS
 {
-	static U32 SOCKTYPE;
-	static U32 PROTOCOL;
-	static U32 LENGTH;
+	U32 SOCKTYPE;
+	U32 PROTOCOL;
+	U32 LENGTH;
 };
 
+U32 HTTP_GET(const char* URL, HTTP_RESPONSE* RESPONSE);
+U32 HTTP_POST(const char* URL, const char* DATA, HTTP_RESPONSE* RESPONSE);
 
 #endif
 #endif
