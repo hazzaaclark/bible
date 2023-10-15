@@ -15,3 +15,5 @@ Fast and Reliable API for NETBible - Psalms 27: 1-3
 # Contribution:
 
 ``Luke 9:23`` ;)
+
+Any and all help from my brothers and sisters would be of the upmost gratitude
