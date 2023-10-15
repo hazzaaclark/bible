@@ -1,2 +1,2 @@
 # bible
-Fast and Reliable API for YouVersion Bible - Psalms 27: 1-3
+Fast and Reliable API for NETBible - Psalms 27: 1-3
