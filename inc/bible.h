@@ -1,13 +1,13 @@
 /* Copyright (C) Harry Clark 2023 */
 
-/* YouVersion Bible API */
+/* NETBible API */
 
 /* THIS FILE PERTAINS TO THE FUNCTIONALITY OF COMMUNICATNG */
 /* WITH THE APP IN RELATION TO THE HTTP CLIENT */
 /* WHICH ACTS AS THE BACKEND TOWARDS SCRAPING INFO FROM THE APP */
 
-#ifndef BIBLE
-#define BIBLE
+#ifndef BIBLE_H
+#define BIBLE_H
 
 /* NESTED INCLUDES */
 
@@ -24,20 +24,17 @@
 #else
 #define USE_BIBLE
 
-#define ENDPOINT       "https://my.bible.com"
-#define SIGN_IN        "/sign-in"
-#define VERSES         "https://nodejs.bible.com/api/moments/votd/3.1"
-
-#define USERNAME       ""
-#define PASSWORD       ""
-#define VOTD           ""
-#define REF            ""
+#define URL "https://labs.bible.org/api/?passage=random"
 
 typedef struct BIBLE
 {
-	static U32 DAY;
-	static char VERSE;
+	char TEXT[512];
+	char BOOK[512];
+	U32 CHAPTER;
+	U32 VERSE;
 };
+
+U32 FETCH_VERSE(BIBLE* BIBLE_VERSE);
 
 #endif
 
