@@ -1,5 +1,5 @@
 # bible
-Fast and Reliable API for NETBible - Psalms 27: 1-3
+Fast and Reliable Bible for your Command Line needs - Psalms 27: 1-3
 
 # Features:
 
