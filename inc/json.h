@@ -29,10 +29,38 @@
 #define GNU_CLANG_FORMAT
 #endif
 
+#if defined(JSON_TYPES)
+#define JSON_TYPES
+#else
+#define JSON_TYPES
+
+#define         JSON_TYPEOF(VALUE)      __typeof__(VALUE)
+#define         JSON_OBJECT(VALUE)      ((VALUE) && JSON_TYPEOF(VALUE) == JSON_OBJECT)
+#define         JSON_ARRAY(VALUE)       ((VALUE) && JSON_TYPEOF(VALUE) == JSON_ARRAY)
+#define         JSON_STRING(VALUE)      ((VALUE) && JSON_TYPEOF(VALUE) == JSON_STRING)
+#define         JSON_CHAR(VALUE)        ((VALUE) && JSON_TYPEOF(VALUE) == JSON_CHAR)
+#define         JSON_INT(VALUE)         ((VALUE) && JSON_TYPEOF(VALUE) == JSON_INT)
+#define         JSON_TRUE(VALUE)        ((VALUE) && JSON_TYPEOF(VALUE) == JSON_TRUE)
+#define         JSON_FALSE(VALUE)       ((VALUE) && JSON_TYPEOF(VALUE) == JSON_FALSE)
+#define         JSON_NULL(VALUE)        ((VALUE) && JSON_TYPEOF(VALUE) == JSON_NULL_TERM)
+
+#define         JSON_ERROR              80
+
+#endif
+
 typedef struct JSON
 {
     JSON_TYPE* TYPE;
     UNK* LENGTH;
+
+    union ERROR
+    {
+        S32 LINE;
+        S32 COLUMN;
+        S32 POSITION;
+        char* SOURCE[JSON_ERROR];
+
+    } ERROR;
     
 } JSON;
 
