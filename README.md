@@ -11,8 +11,11 @@ Fast and Reliable Bible for your Command Line needs - Psalms 27: 1-3
 
 # Building:
 
-- There will soon be a designated CMAKE file available for this project.
-- in the meantime, it would be a case of compiling the files together through a linker such as g++
+``git clone https://github.com/hazzaaclark/bible.git``
+
+``cd bible``
+
+``make``
 
 # Contribution:
 
