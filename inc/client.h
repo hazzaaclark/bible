@@ -24,6 +24,14 @@
 #include <sys/types.h>
 #endif
 
+#if defined(USE_CLIENT)
+#define USE_CLIENT
+#else
+#define USE_CLIENT
+
+#define     HTTP_TOKEN          ""
+#define     API_KEY             ""
+
 typedef struct HTTP_HEADER
 {
     const char* NAME;
@@ -44,7 +52,8 @@ typedef struct HTTP_CHUNK
 
 typedef struct HTTP_PARSE
 {
-    char PARSE_BUFFER;
+    char* PARSE_BUFFER;
+    char* BUFFER_END;
     char** PARSE_PATH;
     char** PARSE_METHOD;
     UNK* METHOD_LEN;
@@ -53,10 +62,13 @@ typedef struct HTTP_PARSE
 
 } HTTP_PARSE;
 
+char HTTP_PARSE_TOKEN(struct HTTP_PARSE PARSE, UNK* TOKEN_LEN, S32 RETURN);
 int HTTP_PARSE_REQUEST(struct HTTP_PARSE* PARSE, struct HTTP_HEADER* HEADERS);
 int HTTP_PARSE_RESPONSE(struct HTTP_PARSE* PARSE, struct HTTP_HEADER* HEADERS);
 int HTTP_PARSE_HEADERS(struct HTTP_PARSE* PARSE, struct HTTP_HEADER* HEADERS);
 int HTTP_DECODE_CHUNK_DATA(struct HTTP_CHUNK* CHUNK);
 UNK HTTP_DECODE_CHUNK(struct HTTP_CHUNK* CHUNK, char* BUFFER, UNK* BUFFER_SIZE);
+
+#endif
 
 #endif
