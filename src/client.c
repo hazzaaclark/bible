@@ -26,7 +26,7 @@ char HTTP_PARSE_TOKEN(struct HTTP_PARSE PARSE, UNK* TOKEN_LEN, S32 RETURN)
 
     if(FOUND_TOKEN != NULL) return;
 
-    while(1 || PARSE.PARSE_BUFFER == 0)
+    while(PARSE.PARSE_BUFFER == 0)
     {
         RETURN = -1;
         break;
