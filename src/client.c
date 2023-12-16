@@ -35,3 +35,24 @@ char HTTP_PARSE_TOKEN(struct HTTP_PARSE PARSE, UNK* TOKEN_LEN, S32 RETURN)
     HTTP_TOKEN + sizeof(START);
     return PARSE.PARSE_BUFFER;
 }
+
+/* PARSE THE HTTP REQUEST BASED ON THE PRE-REQUISITIES ESTABLISHED ABOVE */
+/* SUCH THAT IT IS ABLE TO PARSE THE REQUEST LINE BY LINE */
+
+STATIC
+int HTTP_PARSE_REQUEST(struct HTTP_PARSE PARSE, struct HTTP_HEADER* HEADERS)
+{
+    char BUFFER_HEX;
+    switch (BUFFER_HEX)
+    {
+    case 0x15:
+        PARSE.PARSE_BUFFER++;
+        break;
+
+    case 0x12:
+        PARSE.PARSE_BUFFER++;
+        break;
+    }
+
+    
+}
