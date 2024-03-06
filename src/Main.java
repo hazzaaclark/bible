@@ -13,11 +13,15 @@ public class Main implements Constants
 
     public static void DISPLAY_MENU()
     {
-        Constants.MENU.append("==========================");
-        Constants.MENU.append("Harry Clark - Bible Parser");
-        Constants.MENU.append("==========================");
-
-
+        Constants.MENU.append("===========================\n");
+        Constants.MENU.append("Harry Clark - Bible Parser \n");
+        Constants.MENU.append("                           \n");
+        Constants.MENU.append("Options:                   \n");    
+        Constants.MENU.append("1. Search Chapter          \n");   
+        Constants.MENU.append("2. Search Verses           \n");
+        Constants.MENU.append("3. Verse Of The Day        \n");
+        Constants.MENU.append("===========================\n");
+        
         System.out.println(Constants.MENU.toString());
     }
 }
