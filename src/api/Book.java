@@ -15,7 +15,7 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book
+public abstract class Book
 {
     private static String BOOK_TITLE = new String();
     private static List<Chapter> CHAPTERS = new ArrayList<>();
@@ -25,5 +25,25 @@ public class Book
         this.BOOK_TITLE = TITLE;
     }
 
+    public final static String GET_TITLE()
+    {
+        return BOOK_TITLE;
+    }
+
+    public final static void ADD_CHAPTER(Chapter CHAPTER_NO)
+    {
+        if(CHAPTER_NO == null)
+        {
+            try
+            {
+                CHAPTERS.add(CHAPTER_NO);
+            }
+
+            catch (Exception EXEC)
+            {
+                throw new IllegalArgumentException("Chapter Number field is Null\n");
+            }
+        }
+    }
 
 }
