@@ -15,10 +15,15 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Book
+import api.Constants;
+
+public class Book implements Constants
 {
     private static String BOOK_TITLE = new String();
     private static List<Chapter> CHAPTERS = new ArrayList<>();
+
+    private static String BOOKS;
+    private static int CHAPTER;
 
     public Book(String TITLE)
     {
@@ -28,6 +33,16 @@ public abstract class Book
     public final static String GET_TITLE()
     {
         return BOOK_TITLE;
+    }
+
+    public final static String GET_BOOK()
+    {
+        return BOOKS;
+    }
+
+    public final static int GET_CHAPTER()
+    {
+        return CHAPTER;
     }
 
     public final static void ADD_CHAPTER(Chapter CHAPTER_NO)
@@ -46,4 +61,15 @@ public abstract class Book
         }
     }
 
+    /* GENERAL PURPOSE OVERRIDE METHOD FOR DECLARING THE CONCATENATION */
+    /* OF STRING LITERALS */
+
+    /* THIS WILL MOSTLY BE USED TO PRINT OUT STRINGS IN RELATION TO BOOKS */
+    /* CHAPTERS, VERSES AND THE SUCH */
+
+    @Override
+    public String toString()
+    {
+        return Constants.PARSE_STRING;
+    }
 }
