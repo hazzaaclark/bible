@@ -18,6 +18,7 @@ import api.Book;
 public class Bible
 {
     private static List<Book> BIBLE_BOOKS;
+    private static final List<Book> WORD_APPERANCES = new ArrayList<>();
     
     public Bible(List<Book> BOOKS)
     {
@@ -29,6 +30,11 @@ public class Bible
         return BIBLE_BOOKS;
     }
 
+    /* PARSE THE LENGTH OF THE USER DEFINED RANGE BY WHICH */
+    /* THEY SEARCH FOR VERSES */
+
+    /* USES THE STRING BUILDER AS A SURROGATE MEANS OF BEING ABLE */
+    /* TO CONCATENATE TYPES  */
     
     public static final void PRINT_VERSE_RANGE(String VERSES)
     {
@@ -70,5 +76,20 @@ public class Bible
         }
 
         System.out.println(Constants.BIBLE_PARSER);
+    }
+
+    /* SEARCHES THROUGH BOOKS AND FINDS OCCURRENCES BASED ON RELEVANT SEARCH TERMS */
+    /* ONCE AGAIN, THIS WILL USE A STRING BUILDER TO CONCATENATE TYPES */
+
+    public static final void PRINT_SEARCH(String SEARCH)
+    {
+
+        /* THIS WILL SHIFT THROUGH THE VARIOUS INSTANCES BY WHICH */
+        /* A RELEVANT WORD OCCURS IN THE LIST OF BOOKS */
+
+        for(Book BOOK_OCCURANCE : WORD_APPERANCES)
+        {
+            Constants.BIBLE_PARSER.append(BOOK_OCCURANCE);
+        }
     }
 }
