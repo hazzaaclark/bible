@@ -22,12 +22,17 @@ public class Book implements Constants
     private static String BOOK_TITLE = new String();
     private static List<Chapter> CHAPTERS = new ArrayList<>();
 
+    private static DESCRIPTOR DESCRIPTOR;
+
     private static String BOOKS;
     private static int CHAPTER;
+    private static int VERSE;
 
-    public Book(String TITLE)
+    public Book(String TITLE, int CHATPER, int VERSE)
     {
         this.BOOK_TITLE = TITLE;
+        this.CHAPTER = CHATPER;
+        this.VERSE = VERSE;
     }
 
     public final static String GET_TITLE()
@@ -60,6 +65,12 @@ public class Book implements Constants
             }
         }
     }
+    
+
+    private static DESCRIPTOR GET_TYPE()
+    {
+        return DESCRIPTOR;
+    }
 
     /* GENERAL PURPOSE OVERRIDE METHOD FOR DECLARING THE CONCATENATION */
     /* OF STRING LITERALS */
@@ -70,6 +81,29 @@ public class Book implements Constants
     @Override
     public String toString()
     {
+        String EVALUATE_TYPE;
+
+        /* THIS WORKS ON THE BASIS FOR BEING ABLE TO */
+        /* ACCESS THE GETTER METHOD TO RETURN LIKEWISE TERMS FROM THE ENUM  */
+
+        switch (GET_TYPE()) 
+        {
+            case NONE:
+                EVALUATE_TYPE = GET_BOOK() + GET_CHAPTER();
+                break;
+
+            case BOOK:
+                EVALUATE_TYPE = GET_BOOK() + ": BOOK\n";
+                break;
+
+            case CHAPTER:
+                EVALUATE_TYPE = GET_BOOK() + GET_CHAPTER() + ": CHATPER\n";
+                break;
+        
+            default:
+                break;
+        }
+
         return Constants.PARSE_STRING;
     }
 }
