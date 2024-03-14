@@ -50,6 +50,11 @@ public class Book implements Constants
         return CHAPTER;
     }
 
+    public final static int GET_VERSE()
+    {
+        return VERSE;
+    }
+
     public final static void ADD_CHAPTER(Chapter CHAPTER_NO)
     {
         if(CHAPTER_NO == null)
@@ -98,6 +103,10 @@ public class Book implements Constants
 
             case CHAPTER:
                 EVALUATE_TYPE = GET_BOOK() + GET_CHAPTER() + ": CHATPER\n";
+                break;
+
+            case VERSE:
+                EVALUATE_TYPE = GET_CHAPTER() + GET_VERSE() + ": VERSE\n";
                 break;
         
             default:
