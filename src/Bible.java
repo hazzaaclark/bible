@@ -112,11 +112,14 @@ public class Bible
 
     public static void PRINT_CHAPTER(int BOOK, int CHATPER_NO)
     {
+        Chapter CHAPTER = new Chapter(CHATPER_NO);
+
         if(BOOK != 0)
         {
             try
             {
                 BIBLE_BOOKS.get(BOOK).GET_CHAPTER(CHATPER_NO);
+                Constants.BIBLE_PARSER.append("Chapter " + CHAPTER.GET_CHAPTER_NUMBER() + "\n");
             }
 
             catch (NumberFormatException EXEC)
