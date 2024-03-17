@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import api.Book;
+import api.Chapter;
+import api.Constants;
 
 public class Bible
 {
@@ -90,6 +92,37 @@ public class Bible
         for(Book BOOK_OCCURANCE : WORD_APPERANCES)
         {
             Constants.BIBLE_PARSER.append(BOOK_OCCURANCE);
+            Constants.BIBLE_PARSER.append("Occurances: " + WORD_APPERANCES.size());
+        }
+
+        if(WORD_APPERANCES == null)
+        {
+            Constants.BIBLE_PARSER.append("No search results found.\n");
+        }
+
+    }
+
+    /* SEARCH THROUGH CHAPTERS WITHIN SAID BOOKS AND FINDS OCCURRENCES */
+    /* BASED ON RELEVANT SEARCH TERMS */
+
+    /* THIS FUNCTION ASSUMES THE ROLE THAT GIVEN AN ARBITRARY INT ARG */
+    /* EVOKING THE STATE THAT THERE IS A CHAPTER TO BE PARSED, IT WILL LOOK FOR RELEVANT ARGS */
+
+    /* OTHERWISE, NOTHING WILL BE PRINTED */
+
+    public static void PRINT_CHAPTER(int BOOK, int CHATPER_NO)
+    {
+        if(BOOK != 0)
+        {
+            try
+            {
+                BIBLE_BOOKS.get(BOOK).GET_CHAPTER(CHATPER_NO);
+            }
+
+            catch (NumberFormatException EXEC)
+            {
+                Constants.BIBLE_PARSER.append("Invalid Numerical Expression, no Chapter or Book found\n");
+            }
         }
     }
 }
