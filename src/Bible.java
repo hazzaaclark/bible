@@ -13,14 +13,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicButtonUI;
+
 import api.Book;
 import api.Chapter;
 import api.Constants;
+import api.Verse;
 
 public class Bible
 {
     private static List<Book> BIBLE_BOOKS;
     private static final List<Book> WORD_APPERANCES = new ArrayList<>();
+    private static String VERSE_APPERANCES;
     
     public Bible(List<Book> BOOKS)
     {
@@ -126,6 +130,27 @@ public class Bible
             {
                 Constants.BIBLE_PARSER.append("Invalid Numerical Expression, no Chapter or Book found\n");
             }
+        }
+
+        System.out.println(Constants.BIBLE_PARSER);
+    }
+
+    /* SIMILAR FUCNTION TO THE ONE ABOVE EXCEPT FOCUSSES ON THE RELEVANT BOOK ID AND NUMBERS ASSOCIATED  */
+    /* WITH THE VERSE BEING ACCESSED */
+
+    public static void PRINT_VERSE_LOOKUP(int BOOK_ID, int CHATPER_NO, int VERSE_NO)
+    {
+        Verse VERSE_INDEX = new Verse(VERSE_NO, VERSE_APPERANCES);
+
+        try
+        {
+            BIBLE_BOOKS.get(BOOK_ID).GET_VERSE(VERSE_NO);
+            Constants.BIBLE_PARSER.append("Verse: " + VERSE_INDEX.GET_TEXT() + "\n");
+        } 
+
+        catch (Exception EXEC)
+        {
+            Constants.BIBLE_PARSER.append("Cannot parse Verse. Invalid Input\n");
         }
     }
 }
