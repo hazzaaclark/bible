@@ -15,7 +15,7 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bible
+public class Bible implements Constants
 {
     private static List<Book> BIBLE_BOOKS;
     private static final List<Book> WORD_APPERANCES = new ArrayList<>();
@@ -82,22 +82,17 @@ public class Bible
     /* SEARCHES THROUGH BOOKS AND FINDS OCCURRENCES BASED ON RELEVANT SEARCH TERMS */
     /* ONCE AGAIN, THIS WILL USE A STRING BUILDER TO CONCATENATE TYPES */
 
-    public static final void PRINT_SEARCH(String SEARCH)
+    public String PRINT_SEARCH()
     {
-
         /* THIS WILL SHIFT THROUGH THE VARIOUS INSTANCES BY WHICH */
         /* A RELEVANT WORD OCCURS IN THE LIST OF BOOKS */
 
-        for(Book BOOK_OCCURANCE : WORD_APPERANCES)
+        for(Book BOOK_OCCURANCE : BIBLE_BOOKS)
         {
-            Constants.BIBLE_PARSER.append(BOOK_OCCURANCE);
-            Constants.BIBLE_PARSER.append("Occurances: " + WORD_APPERANCES.size());
+              BIBLE_PARSER.append(BOOK_OCCURANCE.toString()).append("\n");
         }
 
-        if(WORD_APPERANCES == null)
-        {
-            Constants.BIBLE_PARSER.append("No search results found.\n");
-        }
+        return BIBLE_PARSER.toString();
 
     }
 
@@ -147,5 +142,29 @@ public class Bible
         {
             Constants.BIBLE_PARSER.append("Cannot parse Verse. Invalid Input\n");
         }
+    }
+
+    public void SEARCH_VERSE(String BOOK, int CHAPTER, int VERSE)
+    {
+        for (Book B : BIBLE_BOOKS)
+        {
+            if(B.GET_TITLE().equals(BOOK))
+            {
+                Chapter C = B.GET_CHAPTER(CHAPTER);
+
+                if(C != null)
+                {
+                    Verse V = C.GET_VERSE(VERSE);
+
+                    if(V != null)
+                    {
+                        System.out.println("Verse Found: " + V.GET_TEXT());
+                        return;
+                    }
+                }
+            }
+        }
+
+        System.err.println("Verse not found");
     }
 }
