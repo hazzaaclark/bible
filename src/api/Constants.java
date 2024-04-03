@@ -1,10 +1,11 @@
-package api;
 /* COPYRIGHT (C) HARRY CLARK 2024  */
 
 /* BIBLE PARSING LIBRARY FOR JAVA */
 
 /* THIS FILE PERTAINS TOWARDS THE ATTEMPT AT MODULARISATION */
 /* SUCH THAT FILES DON'T BECOME OVERCROWDED WITH VERBOSE LOGIC */
+
+package api;
 
 import java.util.Scanner;
 
@@ -27,10 +28,15 @@ public interface Constants
     /* GENERAL PURPOSE METHODS FOR ACCESSING INFORMATION */
     /* PERTAINING TOWARDS BOOKS, CHAPTER AND VERSES ALIKE */
 
-    private static String GET_WORD_INFO(Scanner SCANNER, String QUESTION)
+    public static String GET_STRING_INFO(Scanner SCANNER, String VALUE)
     {
-        System.out.println(QUESTION + ":");
+        System.out.println(VALUE + ":");
         return SCANNER.next();
+    }
+
+    public static String GET_WORD_INFO(Scanner SCANNER)
+    {
+        return GET_STRING_INFO(SCANNER, "");
     }
 
     private static int GET_NUMBER_INPUT(Scanner SCANNER, String QUESTION)
@@ -41,7 +47,7 @@ public interface Constants
 
     private static String GET_VERSE_INFO(Scanner SCANNER)
     {
-        return GET_WORD_INFO(SCANNER, "Enter the range of the verses you want to search for!\n");
+        return GET_STRING_INFO(SCANNER, "Enter the range of the verses you want to search for!\n");
     }
 
     private static int GET_CHAPTER_INFO(Scanner SCANNER)
