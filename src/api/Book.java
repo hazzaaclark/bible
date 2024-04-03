@@ -2,11 +2,11 @@
 
 /* BIBLE PARSING LIBRARY FOR JAVA */
 
-/* THIS FILE PERTAINS TOWARDS THE BOOK FUNCTIONALITY SURROUNDING */
-/* THE API LEXER */
+/* THIS FILE PERTAINS TOWARDS THE FUNCTIONALITY OF REPRESENTING THE BIBLE */
+/* AS A DATA STRUCTURE, READY TO USE IN OTHER PRE-REQUISITIES */
 
-/* BY USING JSOUP, THIS WILL HOUSE THE DEFINTIONS FOR INTERACTING WITH */
-/* THE API TO BE ABLE TO SCRAP INFORMATION PERTAINING TOWARDS THE BIBLE */
+/* BEING ABLE TO INDEX VERSES, BOOKS, CHAPTERS AND THEIR RELATIVE SIZE */
+/* USING BASIC DS&A'S SUCH AS LISTS AND HASHMAP'S */
 
 package api;
 
@@ -15,104 +15,156 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.Constants;
-
-public class Book implements Constants
+public class Bible implements Constants
 {
-    private static String BOOK_TITLE = new String();
-    private static List<Chapter> CHAPTERS = new ArrayList<>();
-
-    private static DESCRIPTOR DESCRIPTOR;
-
-    private static String BOOKS;
-    private static int CHAPTER;
-    private static int VERSE;
-
-    public Book(String TITLE, int CHATPER, int VERSE)
+    private static List<Book> BIBLE_BOOKS;
+    private static final List<Book> WORD_APPERANCES = new ArrayList<>();
+    private static String VERSE_APPERANCES;
+    
+    public Bible(List<Book> BOOKS)
     {
-        this.BOOK_TITLE = TITLE;
-        this.CHAPTER = CHATPER;
-        this.VERSE = VERSE;
+        this.BIBLE_BOOKS = BOOKS;
     }
 
-    public final static String GET_TITLE()
+    public static List<Book> GET_BOOK_AMOUNT()
     {
-        return BOOK_TITLE;
+        return BIBLE_BOOKS;
     }
 
-    public final static String GET_BOOK()
+    /* PARSE THE LENGTH OF THE USER DEFINED RANGE BY WHICH */
+    /* THEY SEARCH FOR VERSES */
+
+    /* USES THE STRING BUILDER AS A SURROGATE MEANS OF BEING ABLE */
+    /* TO CONCATENATE TYPES  */
+    
+    public static final void PRINT_VERSE_RANGE(String VERSES)
     {
-        return BOOKS;
+        int INDEX = 0;
+        int START, END;
+        char VERSE_WHITESPACE = VERSES.charAt(INDEX);
+        boolean VERSE_MIDDLE;
+
+        /* INDEX THROUGH ALL RESPECTIVE ELEMENTS OF THE LENGTH */
+        /* OF THE PROPOSED VERSE */
+
+        /* THIS IS A MINIMAL CHECK TO DISCERN FOR WHITESPACE IN BETWEEN */
+        /* VERSES SUCH IS THE CASE WITH READING A TEXT FILE */
+
+        /* MAKING SURE THAT THE PARSER TAKES INTO ACCOUNT THE LENGTH OF EACH SENTENCE */
+        
+        for(INDEX = 0; INDEX < VERSES.length(); INDEX++)
+        {
+            switch (VERSE_WHITESPACE) 
+            {
+                case '-':
+                    VERSE_MIDDLE = true;
+                    break;
+            
+                default:
+                    break;
+            }
+        }
+
+        try
+        {
+            START = Integer.parseInt(Constants.BIBLE_START_OFFSET);
+            END = Integer.parseInt(Constants.BIBLE_END_OFFSET);
+        }
+
+        catch (NumberFormatException EXEC)
+        {
+            Constants.BIBLE_PARSER.append("Invalid range or range is out of the buffer\n");
+        }
+
+        System.out.println(Constants.BIBLE_PARSER);
     }
 
-    public final static int GET_CHAPTER()
+    /* SEARCHES THROUGH BOOKS AND FINDS OCCURRENCES BASED ON RELEVANT SEARCH TERMS */
+    /* ONCE AGAIN, THIS WILL USE A STRING BUILDER TO CONCATENATE TYPES */
+
+    public String PRINT_SEARCH()
     {
-        return CHAPTER;
+        /* THIS WILL SHIFT THROUGH THE VARIOUS INSTANCES BY WHICH */
+        /* A RELEVANT WORD OCCURS IN THE LIST OF BOOKS */
+
+        for(Book BOOK_OCCURANCE : BIBLE_BOOKS)
+        {
+              BIBLE_PARSER.append(BOOK_OCCURANCE.toString()).append("\n");
+        }
+
+        return BIBLE_PARSER.toString();
+
     }
 
-    public final static int GET_VERSE()
-    {
-        return VERSE;
-    }
+    /* SEARCH THROUGH CHAPTERS WITHIN SAID BOOKS AND FINDS OCCURRENCES */
+    /* BASED ON RELEVANT SEARCH TERMS */
 
-    public final static void ADD_CHAPTER(Chapter CHAPTER_NO)
+    /* THIS FUNCTION ASSUMES THE ROLE THAT GIVEN AN ARBITRARY INT ARG */
+    /* EVOKING THE STATE THAT THERE IS A CHAPTER TO BE PARSED, IT WILL LOOK FOR RELEVANT ARGS */
+
+    /* OTHERWISE, NOTHING WILL BE PRINTED */
+
+    public static void PRINT_CHAPTER(int BOOK, int CHATPER_NO)
     {
-        if(CHAPTER_NO == null)
+        Chapter CHAPTER = new Chapter(CHATPER_NO);
+
+        if(BOOK != 0)
         {
             try
             {
-                CHAPTERS.add(CHAPTER_NO);
+                BIBLE_BOOKS.get(BOOK).GET_CHAPTER(CHATPER_NO);
+                Constants.BIBLE_PARSER.append("Chapter " + CHAPTER.GET_CHAPTER_NUMBER() + "\n");
             }
 
-            catch (Exception EXEC)
+            catch (NumberFormatException EXEC)
             {
-                throw new IllegalArgumentException("Chapter Number field is Null\n");
+                Constants.BIBLE_PARSER.append("Invalid Numerical Expression, no Chapter or Book found\n");
             }
         }
-    }
-    
 
-    private static DESCRIPTOR GET_TYPE()
-    {
-        return DESCRIPTOR;
+        System.out.println(Constants.BIBLE_PARSER);
     }
 
-    /* GENERAL PURPOSE OVERRIDE METHOD FOR DECLARING THE CONCATENATION */
-    /* OF STRING LITERALS */
+    /* SIMILAR FUCNTION TO THE ONE ABOVE EXCEPT FOCUSSES ON THE RELEVANT BOOK ID AND NUMBERS ASSOCIATED  */
+    /* WITH THE VERSE BEING ACCESSED */
 
-    /* THIS WILL MOSTLY BE USED TO PRINT OUT STRINGS IN RELATION TO BOOKS */
-    /* CHAPTERS, VERSES AND THE SUCH */
-
-    @Override
-    public String toString()
+    public static void PRINT_VERSE_LOOKUP(int BOOK_ID, int CHATPER_NO, int VERSE_NO)
     {
-        String EVALUATE_TYPE;
+        Verse VERSE_INDEX = new Verse(VERSE_NO, VERSE_APPERANCES);
 
-        /* THIS WORKS ON THE BASIS FOR BEING ABLE TO */
-        /* ACCESS THE GETTER METHOD TO RETURN LIKEWISE TERMS FROM THE ENUM  */
-
-        switch (GET_TYPE()) 
+        try
         {
-            case NONE:
-                EVALUATE_TYPE = GET_BOOK() + GET_CHAPTER();
-                break;
+            BIBLE_BOOKS.get(BOOK_ID).GET_VERSE(VERSE_NO);
+            Constants.BIBLE_PARSER.append("Verse: " + VERSE_INDEX.GET_TEXT() + "\n");
+        } 
 
-            case BOOK:
-                EVALUATE_TYPE = GET_BOOK() + ": BOOK\n";
-                break;
+        catch (Exception EXEC)
+        {
+            Constants.BIBLE_PARSER.append("Cannot parse Verse. Invalid Input\n");
+        }
+    }
 
-            case CHAPTER:
-                EVALUATE_TYPE = GET_BOOK() + GET_CHAPTER() + ": CHATPER\n";
-                break;
+    public void SEARCH_VERSE(String BOOK, int CHAPTER, int VERSE)
+    {
+        for (Book B : BIBLE_BOOKS)
+        {
+            if(B.GET_TITLE().equals(BOOK))
+            {
+                Chapter C = B.GET_CHAPTER(CHAPTER);
 
-            case VERSE:
-                EVALUATE_TYPE = GET_CHAPTER() + GET_VERSE() + ": VERSE\n";
-                break;
-        
-            default:
-                break;
+                if(C != null)
+                {
+                    Verse V = C.GET_VERSE(VERSE);
+
+                    if(V != null)
+                    {
+                        System.out.println("Verse Found: " + V.GET_TEXT());
+                        return;
+                    }
+                }
+            }
         }
 
-        return Constants.PARSE_STRING;
+        System.err.println("Verse not found");
     }
 }
