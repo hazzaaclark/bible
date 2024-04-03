@@ -6,19 +6,20 @@
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 import api.Bible;
 import api.Book;
 import api.Constants;
 import api.Dictionary;
+import api.Verse;
 
 public class Main extends Bible implements Constants 
 {
     private static int INDEX = 0;
-    private static String CHOICE;
     private static Scanner CHOICE_SCAN = new Scanner(System.in);
     private static String CHAPTER_NUMBER = new String();
+    private static String URL = "https://www.bible.com/verse-of-the-day";
+    private static String VERSE;
 
     public Main(List<Book> BOOKS) 
     {
@@ -58,7 +59,7 @@ public class Main extends Bible implements Constants
                 case 1:
                     System.out.print("Enter the chapter number: ");
                     CHAPTER_NUMBER = Constants.SCANNER.nextLine();
-                    Bible.PRINT_SEARCH(Constants.GET_WORD_INFO(CHOICE_SCAN, "Chapter " + CHAPTER_NUMBER));
+                    Bible.PRINT_SEARCH(Constants.GET_WORD_INFO(CHOICE_SCAN));
                     break;
                 
                 default:
