@@ -21,13 +21,20 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 
 public class Bible implements Constants
 {
     private static List<Book> BIBLE_BOOKS;
     private static final List<Book> WORD_APPERANCES = new ArrayList<>();
+    private static String VERSE_TEXT;
     private static String VERSE_APPERANCES;
-    private static File BIBLE_XML = new File("KJV.xml");
+    private static File BIBLE_XML = new File("bible/KJV.xml");
+    private static NodeList BOOK_LIST;
+    private static NodeList CHAPTER_LIST;
+    private static NodeList VERSE_LIST;
+    private static Node BOOK_NODE;
+    private static int INDEX;
     
     public Bible(List<Book> BOOKS)
     {
@@ -47,7 +54,6 @@ public class Bible implements Constants
     
     public static final void PRINT_VERSE_RANGE(String VERSES)
     {
-        int INDEX = 0;
         int START, END;
         char VERSE_WHITESPACE = VERSES.charAt(INDEX);
         boolean VERSE_MIDDLE;
@@ -156,12 +162,58 @@ public class Bible implements Constants
     {
         try
         {
-            
+            Document DOC = LOAD_XML_FILE("KJV.xml");
+            Element VERSE_ELEMENTS = FIND_VERSE(DOC, BOOK, CHAPTER, VERSE);
+
+            if(VERSE_ELEMENTS != null)
+            {
+                VERSE_TEXT = VERSE_ELEMENTS.getTextContent();
+                System.out.println(VERSE_TEXT);
+            }
+
+            else
+            {
+                System.err.println("No verse found");
+            }
         }
 
         catch (Exception EXEC)
         {
             EXEC.printStackTrace();
         }
+    }
+
+    private static Document LOAD_XML_FILE(String FILENAME) throws Exception
+    {
+        DocumentBuilderFactory XML_FACTORY = DocumentBuilderFactory.newInstance(); 
+        DocumentBuilder XML_BUILDER = XML_FACTORY.newDocumentBuilder();
+        return XML_BUILDER.parse(BIBLE_XML);
+    }
+
+    private static Element FIND_VERSE(Document DOC, String BOOK, int CHAPTER, int VERSE)
+    {
+        BOOK_LIST = DOC.getElementsByTagName("book");
+        for(INDEX = 0; INDEX < BOOK_LIST.getLength(); INDEX++)
+        {
+            Element BOOK_ELEMENT = (Element) BOOK_LIST.item(INDEX);
+            String ATTRIBUTE = BOOK_ELEMENT.getAttribute("num");
+
+            if(!ATTRIBUTE.equals(BOOK)) continue;
+
+            CHAPTER_LIST = BOOK_ELEMENT.getElementsByTagName("chapter");
+
+            if(CHAPTER_LIST.getLength() < CHAPTER) return null;
+
+            Element CHAPTER_ELEMENT = (Element) CHAPTER_LIST.item(CHAPTER - 1);
+
+            VERSE_LIST = CHAPTER_ELEMENT.getElementsByTagName("verse");
+
+            if(VERSE_LIST.getLength() < VERSE) return null;
+
+            Element VERSE_ELEMENT = (Element) VERSE_LIST.item(VERSE - 1);
+            return VERSE_ELEMENT;
+        }
+
+        return null;
     }
 }
