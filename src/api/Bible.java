@@ -15,11 +15,19 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.File;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+
 public class Bible implements Constants
 {
     private static List<Book> BIBLE_BOOKS;
     private static final List<Book> WORD_APPERANCES = new ArrayList<>();
     private static String VERSE_APPERANCES;
+    private static File BIBLE_XML = new File("KJV.xml");
     
     public Bible(List<Book> BOOKS)
     {
@@ -144,27 +152,16 @@ public class Bible implements Constants
         }
     }
 
-    public void SEARCH_VERSE(String BOOK, int CHAPTER, int VERSE)
+    public static void SEARCH_VERSE(String BOOK, int CHAPTER, int VERSE)
     {
-        for (Book B : BIBLE_BOOKS)
+        try
         {
-            if(B.GET_TITLE().equals(BOOK))
-            {
-                Chapter C = B.GET_CHAPTER(CHAPTER);
-
-                if(C != null)
-                {
-                    Verse V = C.GET_VERSE(VERSE);
-
-                    if(V != null)
-                    {
-                        System.out.println("Verse Found: " + V.GET_TEXT());
-                        return;
-                    }
-                }
-            }
+            
         }
 
-        System.err.println("Verse not found");
+        catch (Exception EXEC)
+        {
+            EXEC.printStackTrace();
+        }
     }
 }
