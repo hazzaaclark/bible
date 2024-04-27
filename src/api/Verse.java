@@ -10,15 +10,21 @@
 
 package api;
 
-import api.Book;
+import java.util.Optional;
+import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 public class Verse implements Constants 
 {    
     private static int VERSE_NO;
     private static String VERSE_TEXT;
+    public final Optional<String> VERSE_LITERAL = SCRAPE_VERSE();
+    private static Document DOC;
+    private static String URL = "https://www.bible.com/verse-of-the-day";
+    private static Elements VERSE_ELEMENTS;
 
     public Verse(int VERSE_NO, String VERSE_TEXT)
     {
@@ -34,5 +40,34 @@ public class Verse implements Constants
     public static final String GET_TEXT()
     {
         return VERSE_TEXT;
+    }
+
+    /* CREATE A GLOBAL METHOD FOR RETURNING THE SCRAPED CONTENTS OF THE VERSE */
+
+    public String GET_VOTD()
+    {
+        SCRAPE_VERSE();
+        return VERSE_LITERAL.orElse("Failed to parse contents of the Verse");
+    }
+
+    /* USING THE OPTIONAL METHOD TO BE ABLE TO DISCERN A PLAUSIBLE RETURN CLAUSE */
+    /* IN RELATION TO RELATIVE STRING DATA */
+
+    private Optional<String> SCRAPE_VERSE()
+    {
+        try
+        {
+            
+            DOC = Jsoup.connect(URL).get();
+            VERSE_ELEMENTS = DOC.select("div.mbs-3.border.border-l-large.border-black.pli-1.plb-1.pis-2");
+            VERSE_TEXT = VERSE_ELEMENTS.text().trim();
+            return Optional.of(VERSE_TEXT);
+        }
+
+        catch (Exception EXEC)
+        {
+            System.err.println("Failed to scrape the Verse: " + EXEC.getMessage());
+            return Optional.empty();
+        }
     }
 }
