@@ -62,8 +62,12 @@ public class Bible implements Constants
                 Element VERSE_ELEMENT = FIND_VERSE(DOC, BOOK, CHAPTER, VERSE_NO);
                 if (VERSE_ELEMENT != null) 
                 {
-                    String VERSE_TEXT = VERSE_ELEMENT.getTextContent();
-                    System.out.println(VERSE_TEXT);
+                    String VERSE_WHITESPACE = VERSE_ELEMENT.getParentNode().getAttributes().getNamedItem("num").getTextContent();
+                    if (VERSE_WHITESPACE.equals(Integer.toString(CHAPTER))) 
+                    {
+                        String VERSE_TEXT = VERSE_ELEMENT.getTextContent();
+                        System.out.println(VERSE_TEXT);
+                    }
                 } 
                 else 
                 {
