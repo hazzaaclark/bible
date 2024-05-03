@@ -20,6 +20,14 @@ public class Main
     private static String CHAPTER_NUMBER = new String();
     private static String URL = "https://www.bible.com/verse-of-the-day";
     private static String VERSE;
+
+    private static String BOOK_NAME;
+    private static int CHAPTER_NO;
+    private static int VERSE_NO;
+
+    private static int VERSE_START_RANGE;
+    private static int VERSE_END_RANGE;
+
     public static void main(String[] args)
     {
         DISPLAY_MENU();
@@ -56,11 +64,11 @@ public class Main
             {
                 case 1:
                     System.out.println("Enter the Book Name (e.g, Rom, Phil, Tim): ");
-                    String BOOK_NAME = Constants.SCANNER.nextLine();
+                    BOOK_NAME = Constants.SCANNER.nextLine();
                     System.out.println("Enter the Chapter Number: ");
-                    int CHAPTER_NO = Constants.SCANNER.nextInt();
+                    CHAPTER_NO = Constants.SCANNER.nextInt();
                     System.out.println("Enter the Verse Number: ");
-                    int VERSE_NO = Constants.SCANNER.nextInt();
+                    VERSE_NO = Constants.SCANNER.nextInt();
 
                     BIBLE.SEARCH_VERSE(BOOK_NAME, CHAPTER_NO, VERSE_NO);
                     break;
@@ -70,6 +78,20 @@ public class Main
                     System.out.println(VERSE);
                     break;
                 
+                case 3:
+                    System.out.println("Enter the Book Name (e.g, Rom, Phil, Tim): ");
+                    BOOK_NAME = Constants.SCANNER.nextLine();
+                    System.out.println("Enter the Chapter Number: ");
+                    CHAPTER_NO = Constants.SCANNER.nextInt();
+                    System.out.println("Enter the Starting Verse Number: ");
+                    VERSE_START_RANGE = Constants.SCANNER.nextInt();
+                    System.out.println("Enter the Ending Verse Number: ");
+                    VERSE_END_RANGE = Constants.SCANNER.nextInt();
+
+                    BIBLE.PRINT_VERSE_RANGE(BOOK_NAME, CHAPTER_NO, VERSE_START_RANGE, VERSE_END_RANGE);
+                    break;
+
+
                 default:
                     System.out.println("Invalid Option");
                     break;
