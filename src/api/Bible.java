@@ -51,46 +51,30 @@ public class Bible implements Constants
 
     /* USES THE STRING BUILDER AS A SURROGATE MEANS OF BEING ABLE */
     /* TO CONCATENATE TYPES  */
-    
-    public static final void PRINT_VERSE_RANGE(String VERSES)
+
+    public static final void PRINT_VERSE_RANGE(String BOOK, int CHAPTER, int START_VERSE, int END_VERSE) 
     {
-        int START, END;
-        char VERSE_WHITESPACE = VERSES.charAt(INDEX);
-        boolean VERSE_MIDDLE;
-
-        /* INDEX THROUGH ALL RESPECTIVE ELEMENTS OF THE LENGTH */
-        /* OF THE PROPOSED VERSE */
-
-        /* THIS IS A MINIMAL CHECK TO DISCERN FOR WHITESPACE IN BETWEEN */
-        /* VERSES SUCH IS THE CASE WITH READING A TEXT FILE */
-
-        /* MAKING SURE THAT THE PARSER TAKES INTO ACCOUNT THE LENGTH OF EACH SENTENCE */
-        
-        for(INDEX = 0; INDEX < VERSES.length(); INDEX++)
+        try 
         {
-            switch (VERSE_WHITESPACE) 
+            Document DOC = LOAD_XML_FILE("KJV.xml");
+            for (int VERSE_NO = START_VERSE; VERSE_NO <= END_VERSE; VERSE_NO++) 
             {
-                case '-':
-                    VERSE_MIDDLE = true;
-                    break;
-            
-                default:
-                    break;
+                Element VERSE_ELEMENT = FIND_VERSE(DOC, BOOK, CHAPTER, VERSE_NO);
+                if (VERSE_ELEMENT != null) 
+                {
+                    String VERSE_TEXT = VERSE_ELEMENT.getTextContent();
+                    System.out.println(VERSE_TEXT);
+                } 
+                else 
+                {
+                    System.err.println("No verse found for " + BOOK + " " + CHAPTER + ":" + VERSE_NO);
+                }
             }
-        }
-
-        try
+        } 
+        catch (Exception EXEC) 
         {
-            START = Integer.parseInt(Constants.BIBLE_START_OFFSET);
-            END = Integer.parseInt(Constants.BIBLE_END_OFFSET);
+            EXEC.printStackTrace();
         }
-
-        catch (NumberFormatException EXEC)
-        {
-            Constants.BIBLE_PARSER.append("Invalid range or range is out of the buffer\n");
-        }
-
-        System.out.println(Constants.BIBLE_PARSER);
     }
 
     /* SEARCHES THROUGH BOOKS AND FINDS OCCURRENCES BASED ON RELEVANT SEARCH TERMS */
@@ -190,30 +174,30 @@ public class Bible implements Constants
         return XML_BUILDER.parse(BIBLE_XML);
     }
 
-    private static Element FIND_VERSE(Document DOC, String BOOK, int CHAPTER, int VERSE)
+    private static Element FIND_VERSE(Document DOC, String BOOK, int CHAPTER, int VERSE) 
     {
         BOOK_LIST = DOC.getElementsByTagName("book");
-        for(INDEX = 0; INDEX < BOOK_LIST.getLength(); INDEX++)
+        for (INDEX = 0; INDEX < BOOK_LIST.getLength(); INDEX++) 
         {
             Element BOOK_ELEMENT = (Element) BOOK_LIST.item(INDEX);
             String ATTRIBUTE = BOOK_ELEMENT.getAttribute("num");
-
-            if(!ATTRIBUTE.equals(BOOK)) continue;
-
+    
+            if (!ATTRIBUTE.equals(BOOK)) continue;
+    
             CHAPTER_LIST = BOOK_ELEMENT.getElementsByTagName("chapter");
-
-            if(CHAPTER_LIST.getLength() < CHAPTER) return null;
-
+    
+            if (CHAPTER_LIST.getLength() < CHAPTER) return null;
+    
             Element CHAPTER_ELEMENT = (Element) CHAPTER_LIST.item(CHAPTER - 1);
-
+    
             VERSE_LIST = CHAPTER_ELEMENT.getElementsByTagName("verse");
-
-            if(VERSE_LIST.getLength() < VERSE) return null;
-
+    
+            if (VERSE_LIST.getLength() < VERSE) return null;
+    
             Element VERSE_ELEMENT = (Element) VERSE_LIST.item(VERSE - 1);
             return VERSE_ELEMENT;
         }
-
+    
         return null;
     }
 }
