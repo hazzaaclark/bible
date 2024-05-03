@@ -42,6 +42,7 @@ public class Main
         Constants.MENU.append("Options:                   \n");    
         Constants.MENU.append("1. Search Verses           \n");   
         Constants.MENU.append("2. Verse Of The Day        \n");
+        Constants.MENU.append("3. Print Verse Range       \n");
         Constants.MENU.append("===========================\n");
 
         System.out.println(Constants.MENU.toString());
