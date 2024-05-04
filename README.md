@@ -28,7 +28,7 @@ Here is a Dictionary to provide liasse for that:
 
 ``Numbers: Num``
 
-``Deuteronomy: Deu``
+``Deuteronomy: Deut``
 
 ``Joshua: Josh``
 
