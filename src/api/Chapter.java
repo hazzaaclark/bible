@@ -23,9 +23,12 @@ public class Chapter implements Constants
         this.CHAPTER_NUMBER = CHAPTER_NO;
     }
 
-    public List<Verse> GET_VERSE()
+    /* 04/05/24 - USES A TERNARY OPERATOR TO REDUCE TYPE COMPLEXITTY */
+    /* THIS STILL EVALUATES THE INDEXXING OF THE VERSE ARRAY */
+
+    public Verse GET_VERSE(int VERSE) 
     {
-        return VERSES;
+        return (VERSE >= 1 && VERSE <= VERSES.size()) ? VERSES.get(VERSE - 1) : null;
     }
 
     public int GET_CHAPTER_NUMBER()
