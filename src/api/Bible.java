@@ -171,7 +171,7 @@ public class Bible implements Constants
         }
     }
 
-    private static Document LOAD_XML_FILE(String FILENAME) throws Exception
+    private static Document LOAD_XML_FILE(File FILENAME) throws Exception
     {
         DocumentBuilderFactory XML_FACTORY = DocumentBuilderFactory.newInstance(); 
         DocumentBuilder XML_BUILDER = XML_FACTORY.newDocumentBuilder();
