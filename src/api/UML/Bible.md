@@ -32,25 +32,3 @@ _______________________
 
 - INDEX : int
 _____________
-
-
-# DIAGRAM:
-
--------------------------------------
-|             Bible                 |
--------------------------------------
-| - BIBLE_BOOKS: List<Book>         |
-| - WORD_APPERANCES: List<String>   |
-| - VERSE_TEXT: String              |
-| - VERSE_TEXT_ELEMENTS: String[]   |
-| - VERSE_APPERANCES: String        |
-| - BIBLE_XML: File                 |
-| - INDEX: int                      |
--------------------------------------
-| + Bible()                         |
--------------------------------------
-                  |
--------------------------------------
-|         <<interface>>             |
-|           Constants               |
--------------------------------------
