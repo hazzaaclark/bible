@@ -38,11 +38,12 @@ public class Main
     {
         Constants.MENU.append("===========================\n");
         Constants.MENU.append("Harry Clark - Bible Parser \n");
-        Constants.MENU.append("                           \n");
+        Constants.MENU.append("===========================\n");
         Constants.MENU.append("Options:                   \n");    
         Constants.MENU.append("1. Search Verses           \n");   
         Constants.MENU.append("2. Verse Of The Day        \n");
         Constants.MENU.append("3. Print Verse Range       \n");
+        Constants.MENU.append("4. Print Keyword           \n");
         Constants.MENU.append("===========================\n");
 
         System.out.println(Constants.MENU.toString());
@@ -92,6 +93,11 @@ public class Main
                     BIBLE.PRINT_VERSE_RANGE(BOOK_NAME, CHAPTER_NO, VERSE_START_RANGE, VERSE_END_RANGE);
                     break;
 
+                case 4:
+                    System.out.println("Enter the keyword to search: ");
+                    String KEYWORD = Constants.SCANNER.nextLine();
+                    BIBLE.SEARCH_KEYWORD(KEYWORD);
+                    break;
 
                 default:
                     System.out.println("Invalid Option");
