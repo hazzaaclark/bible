@@ -26,8 +26,9 @@ import org.w3c.dom.Node;
 public class Bible implements Constants
 {
     private static List<Book> BIBLE_BOOKS;
-    private static final List<Book> WORD_APPERANCES = new ArrayList<>();
+    private static final List<String> WORD_APPERANCES = new ArrayList<>();
     private static String VERSE_TEXT;
+    private static String[] VERSE_TEXT_ELEMENTS;
     private static String VERSE_APPERANCES;
     private static File BIBLE_XML = new File("bible/KJV.xml");
     private static NodeList BOOK_LIST;
@@ -56,7 +57,7 @@ public class Bible implements Constants
     {
         try 
         {
-            Document DOC = LOAD_XML_FILE("KJV.xml");
+            Document DOC = LOAD_XML_FILE(BIBLE_XML);
             for (int VERSE_NO = START_VERSE; VERSE_NO <= END_VERSE; VERSE_NO++) 
             {
                 Element VERSE_ELEMENT = FIND_VERSE(DOC, BOOK, CHAPTER, VERSE_NO);
@@ -150,7 +151,7 @@ public class Bible implements Constants
     {
         try
         {
-            Document DOC = LOAD_XML_FILE("KJV.xml");
+            Document DOC = LOAD_XML_FILE(BIBLE_XML);
             Element VERSE_ELEMENTS = FIND_VERSE(DOC, BOOK, CHAPTER, VERSE);
 
             if(VERSE_ELEMENTS != null)
@@ -171,6 +172,58 @@ public class Bible implements Constants
         }
     }
 
+    public static final void SEARCH_KEYWORD(String KEYWORD)
+    {
+        try
+        {
+            Document DOC = LOAD_XML_FILE(BIBLE_XML);
+            BOOK_LIST = DOC.getElementsByTagName("book");
+            boolean WORD_FOUND = false;
+
+            for (int BOOK_INDEX = 0; BOOK_INDEX < BOOK_LIST.getLength(); BOOK_INDEX++)
+            {
+                Element BOOK_ELEMENT = (Element) BOOK_LIST.item(BOOK_INDEX);
+                String BOOK_NAME = BOOK_ELEMENT.getAttribute("num");
+
+                CHAPTER_LIST = BOOK_ELEMENT.getElementsByTagName("chapter");
+
+                for (int CHAPTER_INDEX = 0; CHAPTER_INDEX < CHAPTER_LIST.getLength(); CHAPTER_INDEX++)
+                {
+                    Element CHAPTER_ELEMENT = (Element) CHAPTER_LIST.item(CHAPTER_INDEX);
+                    String CHAPTER_NUM = CHAPTER_ELEMENT.getAttribute("num");
+                    
+                    VERSE_LIST = CHAPTER_ELEMENT.getElementsByTagName("verse");
+
+                    for (int VERSE_INDEX = 0; VERSE_INDEX < VERSE_LIST.getLength(); VERSE_INDEX++)
+                    {
+                        Element VERSE_ELEMENT = (Element) VERSE_LIST.item(VERSE_INDEX);
+                        String VERSE_TEXT = VERSE_ELEMENT.getTextContent();
+                        String VERSE_NO = VERSE_ELEMENT.getAttribute("num");
+
+                        if(VERSE_TEXT.toLowerCase().contains(KEYWORD.toLowerCase()))
+                        {
+                            System.out.println(BOOK_NAME + " " + CHAPTER_NUM + ":" + VERSE_NO + " - " + VERSE_TEXT);
+                            WORD_FOUND = true;
+                        }
+                    }
+                }
+            }
+
+            if (!WORD_FOUND)
+            {
+                System.out.println("No occurrences found for keyword: " + KEYWORD);
+            }
+
+            System.exit(0);
+        }
+
+        catch (Exception EXCE)
+        {
+            EXCE.printStackTrace();
+            System.exit(1);
+        }
+    }
+    
     private static Document LOAD_XML_FILE(File FILENAME) throws Exception
     {
         DocumentBuilderFactory XML_FACTORY = DocumentBuilderFactory.newInstance(); 
