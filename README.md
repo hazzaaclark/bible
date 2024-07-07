@@ -14,6 +14,20 @@ Therefore, I have decided to work on a Parsing Library for reading the Bible in 
 
 While there is no intuitive way to build it locally as of right now, the best thing to do would be to git clone this repo, run it through vs code's debugger, and go from there.
 
+# Usage:
+
+Currently works with the provided ``KJV.xml`` file, will look into modular expansion for dynamic reading of XML files to discern between versions
+
+# - 1
+
+![image](https://github.com/hazzaaclark/bible/assets/107435091/15edb5e2-118d-4b24-8a38-ec5250a85754)
+
+# - 2
+
+![image](https://github.com/hazzaaclark/bible/assets/107435091/a75e114f-76e1-490e-b9e3-25ecb8566366)
+
+
+
 # Dictionary:
 
 The way in which the project works is that it will look for the tag name of the names from the XML sheet in relation to User input.
