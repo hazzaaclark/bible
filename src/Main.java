@@ -37,13 +37,15 @@ public class Main
     public static void DISPLAY_MENU()
     {
         Constants.MENU.append("===========================\n");
-        Constants.MENU.append("Harry Clark - Bible Parser \n");
+        Constants.MENU.append("HARRY CLARK - BIBLE PARSER \n");
         Constants.MENU.append("===========================\n");
         Constants.MENU.append("Options:                   \n");    
         Constants.MENU.append("1. Search Verses           \n");   
         Constants.MENU.append("2. Verse Of The Day        \n");
         Constants.MENU.append("3. Print Verse Range       \n");
         Constants.MENU.append("4. Print Keyword           \n");
+        Constants.MENU.append("5. Print Book Length       \n");
+        Constants.MENU.append("===========================\n");
         Constants.MENU.append("===========================\n");
 
         System.out.println(Constants.MENU.toString());
@@ -98,6 +100,13 @@ public class Main
                     String KEYWORD = Constants.SCANNER.nextLine();
                     BIBLE.SEARCH_KEYWORD(KEYWORD);
                     break;
+
+                case 5:
+                    System.out.println("Enter the Book Name (e.g, Rom, Phil, Tim): ");
+                    BOOK_NAME = Constants.SCANNER.nextLine();
+                    BIBLE.PRINT_BOOK_LENGTH(BOOK_NAME);
+                    break;
+
 
                 default:
                     System.out.println("Invalid Option");
