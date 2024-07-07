@@ -30,7 +30,7 @@ public class Bible implements Constants
     private static String VERSE_TEXT;
     private static String[] VERSE_TEXT_ELEMENTS;
     private static String VERSE_APPERANCES;
-    private static File BIBLE_XML = new File("bible/KJV.xml");
+    private static File BIBLE_XML = new File("bible/ESV.xml");
     private static NodeList BOOK_LIST;
     private static NodeList CHAPTER_LIST;
     private static NodeList VERSE_LIST;
@@ -221,6 +221,35 @@ public class Bible implements Constants
         {
             EXCE.printStackTrace();
             System.exit(1);
+        }
+    }
+
+    public static final void PRINT_BOOK_LENGTH(String BOOK_NAME)
+    {
+        try 
+        {
+            Document DOC = LOAD_XML_FILE(BIBLE_XML);
+            BOOK_LIST = DOC.getElementsByTagName("book");
+
+            for (INDEX = 0; INDEX < BOOK_LIST.getLength(); INDEX++) 
+            {
+                Element BOOK_ELEMENT = (Element) BOOK_LIST.item(INDEX);
+                String NAME = BOOK_ELEMENT.getAttribute("num");
+
+                if (NAME.equalsIgnoreCase(BOOK_NAME)) 
+                {
+                    NodeList CHAPTERS = BOOK_ELEMENT.getElementsByTagName("chapter");
+                    int NUMBER_OF_CHAPTERS = CHAPTERS.getLength();
+                    System.out.println("The length of " + BOOK_NAME + " is: " + NUMBER_OF_CHAPTERS + " chapters.");
+                    return;
+                }
+            }
+
+            System.out.println("Book " + BOOK_NAME + " not found.");
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
         }
     }
     
