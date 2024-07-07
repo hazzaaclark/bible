@@ -1,6 +1,8 @@
 # bible
 Bible Parsing Library for the Terminal
 
+![image](https://github.com/hazzaaclark/bible/assets/107435091/15edb5e2-118d-4b24-8a38-ec5250a85754)
+
 # Motive:
 
 The ambition behind this project is moreso a learning exercise if nothing else.
@@ -17,12 +19,6 @@ While there is no intuitive way to build it locally as of right now, the best th
 # Usage:
 
 Currently works with the provided ``KJV.xml`` file, will look into modular expansion for dynamic reading of XML files to discern between versions
-
-# - 1
-
-![image](https://github.com/hazzaaclark/bible/assets/107435091/15edb5e2-118d-4b24-8a38-ec5250a85754)
-
-# - 2
 
 ![image](https://github.com/hazzaaclark/bible/assets/107435091/a75e114f-76e1-490e-b9e3-25ecb8566366)
 
